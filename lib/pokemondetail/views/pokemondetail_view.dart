@@ -35,6 +35,46 @@ class _PokemondetailViewState extends State<PokemondetailView> {
     }
   }
 
+  // ฟังก์ชันเพื่อเลือกสีหลอด stat ตามธาตุ
+  Color _getStatColor(String type) {
+    switch (type.toLowerCase()) {
+      case 'fire':
+        return Colors.redAccent;
+      case 'water':
+        return Colors.blueAccent;
+      case 'grass':
+        return Colors.greenAccent;
+      case 'electric':
+        return Colors.yellowAccent;
+      case 'ice':
+        return Colors.lightBlueAccent;
+      case 'poison':
+        return Colors.purpleAccent;
+      case 'ground':
+        return Colors.brown;
+      case 'psychic':
+        return Colors.pinkAccent;
+      case 'rock':
+        return Colors.grey;
+      case 'dark':
+        return Colors.black87;
+      case 'fairy':
+        return Colors.pink[200]!;
+      case 'fighting':
+        return Colors.orangeAccent;
+      case 'dragon':
+        return Colors.indigoAccent;
+      case 'ghost':
+        return Colors.deepPurpleAccent;
+      case 'steel':
+        return Colors.blueGrey;
+      case 'bug':
+        return Colors.lightGreen;
+      default:
+        return Colors.white;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -136,6 +176,7 @@ class _PokemondetailViewState extends State<PokemondetailView> {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 6),
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     SizedBox(
                                       width: 100,
@@ -147,13 +188,17 @@ class _PokemondetailViewState extends State<PokemondetailView> {
                                         ),
                                       ),
                                     ),
-                                    Expanded(
+                                    const SizedBox(width: 10),
+                                    SizedBox(
+                                      width: 200, // จำกัดความกว้างสูงสุดของหลอด
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(5),
                                         child: LinearProgressIndicator(
                                           value: stat['base_stat'] / 100,
                                           backgroundColor: Colors.blueGrey[800],
-                                          color: Colors.lightBlueAccent,
+                                          color: _getStatColor(
+                                              _pokemonData?['types'][0]['type']
+                                                  ['name']),
                                           minHeight: 12,
                                         ),
                                       ),
